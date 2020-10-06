@@ -12,6 +12,16 @@ class Legolas (var carcaj : Int, nombre : String, vivo : Boolean) : Personaje(no
 
     }
 
-    private fun recargarCarcaj(flechas : Int){}
+    private fun recargarCarcaj(flechas : Int){
+
+        this.carcaj += flechas
+
+        if (this.carcaj > Constantes.MAXFLECHASLEGOLAS){
+
+            this.carcaj = Constantes.MAXFLECHASLEGOLAS
+
+        }
+
+    }
 
 }
