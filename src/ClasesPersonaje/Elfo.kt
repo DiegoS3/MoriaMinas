@@ -1,28 +1,24 @@
 package ClasesPersonaje
 
 import Utiles.Constantes
+import Utiles.Escritor
 
 class Elfo (var carcaj : Int, nombre : String, vivo : Boolean) : Personaje(nombre, vivo){
 
     fun lanzarFlecha(){
 
-        if(this.carcaj > 0){
-
-            this.carcaj --
-
-        }
+        if(carcaj > 0) carcaj--
 
     }
 
     fun recargarCarcaj(flechas : Int){
 
-        this.carcaj += flechas
+        carcaj += flechas
 
-        if (this.carcaj > Constantes.MAXFLECHASLEGOLAS){
+        if (carcaj > Constantes.MAXFLECHASLEGOLAS) carcaj = Constantes.MAXFLECHASLEGOLAS
 
-            this.carcaj = Constantes.MAXFLECHASLEGOLAS
-
-        }
+        Escritor.escribirFichero("$nombre recarga el carcaj con $flechas flechas, quedando con un total de " +
+                "$carcaj flechas en el carcaj\n")
 
     }
 

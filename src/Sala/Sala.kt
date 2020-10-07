@@ -2,7 +2,9 @@ package Sala
 
 import ClasesPersonaje.*
 import Utiles.Constantes
+import Utiles.Escritor
 import Utiles.Metodos
+import kotlin.math.E
 
 class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje){
 
@@ -15,6 +17,7 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
     init {
 
+        Escritor.escribirFichero("\nNuestros amigos entran en la sala número $numero en la que afrontaran un peligro de ${peligro.toString()} \n")
         when(peligro){
 
             Peligro.ACCION -> accion()
@@ -31,8 +34,18 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
     private fun huir(){
 
+        Escritor.escribirFichero("Nuestros amigos de aventura intentan huir de la sala \n")
         derrotas++
-        if (Metodos.porcentaje() > 80) p.vivo = false
+        if (Metodos.porcentaje() > 80) {
+
+            Escritor.escribirFichero("${p.nombre} ha muerto \n")
+            p.vivo = false
+
+        }else{
+
+            Escritor.escribirFichero("Nuestros aventureros huyen con éxito de la sala numero $numero \n")
+
+        }
 
     }
 
@@ -40,6 +53,9 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
         var flechasSuelo = 0
         var enemigos = Metodos.generarNumAleatorio(Constantes.MINENEMIGOS, Constantes.MAXENEMIGOS)
+
+        Escritor.escribirFichero("Han aparecido $enemigos enemigos en la sala \n" +
+                "mientras ${p.nombre} comprobaba su carcaj que tiene ${(p as Elfo).carcaj} flechas \n")
 
         while (((p as Elfo).carcaj > 0) and (enemigos > 0)){
 
@@ -52,10 +68,18 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
         if(enemigos < 1){
 
             victorias++
+            Escritor.escribirFichero("${p.nombre} ha lanzado $flechasSuelo flechas matando a todos sus enemigos \n")
+
+        }else{
+
+            Escritor.escribirFichero("${p.nombre} ha lanzado $flechasSuelo flechas, pero no ha sido" +
+                    "suficiente han quedado $enemigos enemigos vivos\n")
+
+            huir()
 
         }
 
-        (p as Elfo).recargarCarcaj(flechasSuelo)
+        if ((p as Elfo).vivo) (p as Elfo).recargarCarcaj(flechasSuelo)
 
     }
 
@@ -69,6 +93,8 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
             if (superarPeligro() <= 90) {
 
+                Escritor.escribirFichero("Nuestros buenos amigos superan el peligro y pasan a la siguiente sala." +
+                        "${p.nombre} ha estado de 10 \n")
                 (p as Hobbit).quitarseAnillo()
                 victorias++
             }
@@ -76,7 +102,12 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
         }else{
 
-            if (superarPeligro() <= 20) victorias++
+            if (superarPeligro() <= 20){
+
+                Escritor.escribirFichero("Nuestros buenos amigos superan el peligro y pasan a la siguiente sala." +
+                        "${p.nombre} ha estado de 10 \n")
+                victorias++
+            }
             else huir()
 
         }
@@ -88,15 +119,29 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
         var poderMaligno = Metodos.generarNumAleatorio(Constantes.MINPELIGROSALA, Constantes.MAXPELIGROSALA)
         var poder = (p as Mago).poderVara()
 
-        if (poder > poderMaligno) victorias++
+        Escritor.escribirFichero("La sala esta repleta de energía maligna, sera ${p.nombre} capaz de afrontar un total" +
+                " de $peligro puntos y ${p.nombre} tiene una energía de $poder en la vara mágica\n")
+
+        if (poder > poderMaligno){
+
+            Escritor.escribirFichero("Nuestros buenos amigos superan el peligro y pasan a la siguiente sala.\n")
+            victorias++
+        }
         else if(poder == poderMaligno){
 
-            if (superarPeligro() < 60) victorias++
+            if (superarPeligro() < 60) {
+
+                Escritor.escribirFichero("Nuestros buenos amigos superan el peligro y pasan a la siguiente sala.\n")
+                victorias++
+            }
             else huir()
 
         }else{
 
-            if (superarPeligro() < 30) victorias++
+            if (superarPeligro() < 30) {
+                Escritor.escribirFichero("Nuestros buenos amigos superan el peligro y pasan a la siguiente sala.\n")
+                victorias++
+            }
             else huir()
 
         }
