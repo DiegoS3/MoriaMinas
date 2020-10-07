@@ -6,7 +6,7 @@ import ClasesPersonaje.Personaje
 import Utiles.Constantes
 import Utiles.Metodos
 
-class Sala (var numero: Int, var peligro : Peligro, var p : Personaje){
+class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje){
 
     companion object{
 
