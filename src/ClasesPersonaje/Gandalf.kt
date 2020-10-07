@@ -6,7 +6,7 @@ class Gandalf(var vara : Int, nombre : String, vivo : Boolean) : Personaje(nombr
 
         vara += energia
 
-        if (vara > Constantes.MAXVARAGANDALF) vara = Constantes.MAXVARAGANDALF
+        if (vara > Constantes.CARGAMAXVARAGANDALF ) vara = Constantes.CARGAMAXVARAGANDALF
 
     }
 
