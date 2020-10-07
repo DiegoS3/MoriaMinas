@@ -14,7 +14,7 @@ class Escritor {
             fw.close()
         }catch (ioe : IOException){
 
-            Println("Error: $ioe")
+
 
         }
 
