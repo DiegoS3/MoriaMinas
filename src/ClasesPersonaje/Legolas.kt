@@ -4,7 +4,7 @@ import Utiles.Constantes
 
 class Legolas (var carcaj : Int, nombre : String, vivo : Boolean) : Personaje(nombre, vivo){
 
-    private fun lanzarFlecha(){
+    fun lanzarFlecha(){
 
         if(this.carcaj > 0){
 
@@ -14,7 +14,7 @@ class Legolas (var carcaj : Int, nombre : String, vivo : Boolean) : Personaje(no
 
     }
 
-    private fun recargarCarcaj(flechas : Int){
+    fun recargarCarcaj(flechas : Int){
 
         this.carcaj += flechas
 
