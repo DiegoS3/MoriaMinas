@@ -1,8 +1,6 @@
 package Sala
 
-import ClasesPersonaje.Gandalf
-import ClasesPersonaje.Legolas
-import ClasesPersonaje.Personaje
+import ClasesPersonaje.*
 import Utiles.Constantes
 import Utiles.Metodos
 
@@ -43,9 +41,9 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
         var flechasSuelo = 0
         var enemigos = Metodos.generarNumAleatorio(Constantes.MINENEMIGOS, Constantes.MAXENEMIGOS)
 
-        while (((p as Legolas).carcaj > 0) and (enemigos > 0)){
+        while (((p as Elfo).carcaj > 0) and (enemigos > 0)){
 
-            (p as Legolas).lanzarFlecha()
+            (p as Elfo).lanzarFlecha()
             flechasSuelo++
             enemigos--
 
@@ -57,7 +55,7 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
         }
 
-        (p as Legolas).recargarCarcaj(flechasSuelo)
+        (p as Elfo).recargarCarcaj(flechasSuelo)
 
     }
 
@@ -67,11 +65,11 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
         if (probAnillo <= 50){
 
-            (p as Frodo).ponerseAnillo()
+            (p as Hobbit).ponerseAnillo()
 
             if (superarPeligro() <= 90) {
 
-                (p as Frodo).quitarseAnillo()
+                (p as Hobbit).quitarseAnillo()
                 victorias++
             }
             else huir()
@@ -86,9 +84,9 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
     private fun magico(){
 
-        (p as Gandalf).recargarVara(Metodos.generarNumAleatorio(Constantes.MINVARAGANDALF, Constantes.MAXVARAGANDALF))
+        (p as Mago).recargarVara(Metodos.generarNumAleatorio(Constantes.MINVARAGANDALF, Constantes.MAXVARAGANDALF))
         var poderMaligno = Metodos.generarNumAleatorio(Constantes.MINPELIGROSALA, Constantes.MAXPELIGROSALA)
-        var poder = (p as Gandalf).poderVara()
+        var poder = (p as Mago).poderVara()
 
         if (poder > poderMaligno) victorias++
         else if(poder == poderMaligno){
@@ -103,7 +101,7 @@ class Sala constructor(var numero: Int, var peligro : Peligro, var p : Personaje
 
         }
 
-        (p as Gandalf).vara -= poderMaligno
+        (p as Mago).vara -= poderMaligno
 
     }
 

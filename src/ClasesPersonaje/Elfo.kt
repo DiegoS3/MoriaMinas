@@ -2,7 +2,7 @@ package ClasesPersonaje
 
 import Utiles.Constantes
 
-class Legolas (var carcaj : Int, nombre : String, vivo : Boolean) : Personaje(nombre, vivo){
+class Elfo (var carcaj : Int, nombre : String, vivo : Boolean) : Personaje(nombre, vivo){
 
     fun lanzarFlecha(){
 
