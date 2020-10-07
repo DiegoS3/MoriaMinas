@@ -2,6 +2,18 @@ package ClasesPersonaje
 
 import Utiles.Escritor
 
+/**
+ *
+ * Clase Hobbit hereda de Personaje que contiene los metodos que le permiten ponerse
+ * y quitarse su anillo
+ *
+ * @param anillo boolean true si lo tiene puesto, false sino
+ * @param nombre String con el nombre del Hobbit
+ * @param vivo boolean con el estado del personaje
+ *
+ * @author Diego
+ *
+ */
 class Hobbit (var anillo : Boolean, nombre : String, vivo : Boolean) : Personaje(nombre, vivo){
 
     fun ponerseAnillo(){

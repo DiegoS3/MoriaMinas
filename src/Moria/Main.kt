@@ -8,10 +8,19 @@ import Sala.Sala
 import Utiles.Constantes
 import Utiles.Escritor
 import Utiles.Metodos
-import java.util.*
+import java.util.Date
 
+/**
+ *
+ * Es el main de nuestra aplicación, creamos los diferentes personajes
+ * y generamos las salas de una manera aleatoria mientras los 3 sigan vivos
+ *
+ * @author Diego
+ *
+ */
 fun main(){
 
+    //Atributos
     var fecha = Date()
     var gandalf = Mago(Metodos.generarNumAleatorio(Constantes.CARGAMINVARAGANDALF, Constantes.CARGAMAXVARAGANDALF), "Gandalf", true)
     var legolas = Elfo(Metodos.generarNumAleatorio(Constantes.MINFLECHASLEGOLAS, Constantes.MAXFLECHASLEGOLAS), "Legolas", true)
@@ -22,33 +31,34 @@ fun main(){
             "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
             "Con fecha ${fecha.toString()}\n")
 
-
+    //vamos recorriendo y creando las salas mientras alguno de nuestros aventureros este vivo
     principal@ for (sala in 1..Constantes.NUMSALAS) {
 
         Escritor.escribirFichero("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
                 "++++++++++++++++++++++++++++ HAN ENTRADO EN LA SALA $sala +++++++++++++++++++++++++++++++++\n" +
                 "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n \n")
 
-        var ale = Metodos.generarNumAleatorio(1, 3)
+        var ale = Metodos.generarNumAleatorio(1, 3) //Generamos numero aleatorio para ver que tipo de sala tendremos
 
         when (ale) {
-            1 -> { //Sala con peligro MAGICO
-                var salaMagic = Sala(sala, Peligro.MAGICO, gandalf)
-                Thread.sleep(500)
-
-            }
-            2 -> { //Sala con peligro ACCION
+            1 -> { //Sala con peligro de accion
                 var salaAccion = Sala(sala, Peligro.ACCION, legolas)
                 Thread.sleep(500)
 
             }
-            3 -> { //Sala con peligro HABILIDAD
+            2 -> { //Sala con peligro de habilidad
                 var salaHabil = Sala(sala, Peligro.HABILIDAD, frodo)
+                Thread.sleep(500)
+
+            }
+            3 -> { //Sala con peligro de magia
+                var salaMagic = Sala(sala, Peligro.MAGICO, gandalf)
                 Thread.sleep(500)
 
             }
         }
 
+        //Si alguno muere paramos el for
         if (!gandalf.vivo || !legolas.vivo || !frodo.vivo) break@principal
     }
 
